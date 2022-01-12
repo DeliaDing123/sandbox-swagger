@@ -1,0 +1,733 @@
+openapi: 3.0.0
+info:
+  title: Test sandbox backend core
+  version: 1.0.0
+
+servers:
+  - url: https://localhost/ozone
+
+paths:
+  /partner-mgt/find-all:
+    get:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PartnerMgtList"
+  /permission-mgt/find-all:
+    get:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionMgtList"
+  /role-mgt/create:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleMgtCreate"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleMgtItem"
+  /role-mgt/delete:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleMgtId"
+      responses:
+        200:
+          description: ""
+  /role-mgt/update:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleMgtUpdate"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleMgtItem"
+  /role-mgt/find-all:
+    get:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleMgtList"
+  /user-mgt/create:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserMgtCreate"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserMgtItem"
+  /user-mgt/delete:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserMgtId"
+      responses:
+        200:
+          description: ""
+  /user-mgt/update:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserMgtUpdate"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserMgtItem"
+  /user-mgt/find-all:
+    get:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+        - in: "query"
+          name: "pageNumber"
+          schema:
+            type: integer
+        - in: "query"
+          name: "pageSize"
+          schema:
+            type: integer
+        - in: "query"
+          name: "userEmailLike"
+          schema:
+            type: string
+        - in: "query"
+          name: "phoneNumberLike"
+          schema:
+            type: string
+        - in: "query"
+          name: "companyNameLike"
+          schema:
+            type: string
+        - in: "query"
+          name: "partnerIdLike"
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserMgtList"
+  /user-auth/logon/verification-code:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthUserEmail"
+      responses:
+        200:
+          description: ""
+  /user-auth/logon:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthUserLogon"
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUserLogonResp"
+  /user-auth/logoff:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+  /user-auth/reset-pwd/verification-code:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthUserEmail"
+      responses:
+        200:
+          description: ""
+  /user-auth/reset-pwd:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthUserResetPwd"
+      responses:
+        200:
+          description: ""
+  /user-auth/reset-pwd-new:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthUserResetPwdNew"
+      responses:
+        200:
+          description: ""
+  /user-auth/forget-pwd:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthUserForgetPwd"
+      responses:
+        200:
+          description: ""
+  /user-auth/reset-pwd/by-old-pwd:
+    post:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthUserResetPwdByOldPwd"
+      responses:
+        200:
+          description: ""
+  /user-auth/find-permission-list:
+    get:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthUserPermissionList"
+  /license-portal/find-details:
+    get:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LicensePortalDetails"
+  /license-portal/authorized-product/file-list:
+    get:
+      parameters:
+        - in: "header"
+          name: "userToken"
+          required: true
+          schema:
+            type: string
+        - in: "query"
+          name: "productId"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizedProductFiles"
+
+components:
+  schemas:
+    PageableElement:
+      type: object
+      properties:
+        pageNumber:
+          type: integer
+        pageSize:
+          type: integer
+        totalPages:
+          type: integer
+        totalElements:
+          type: integer
+    AuthorizedProductFileItem:
+      type: object
+      properties:
+        fileName:
+          type: string
+        fileDesc:
+          type: string
+        cosObjectKey:
+          type: string
+    AuthorizedProductFileList:
+      type: object
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AuthorizedProductFileItem"
+    AuthorizedProductFiles:
+      type: object
+      properties:
+        dtFrontToken:
+          type: string
+        authorizedProductFileList:
+          $ref: "#/components/schemas/AuthorizedProductFileList"
+    AuthorizedProductItem:
+      type: object
+      properties:
+        icon:
+          type: string
+        desc:
+          type: string
+        descCN:
+          type: string
+        productList:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ProductList"
+        productType:
+          type: string
+        isDownloadAvailable:
+          type: boolean
+    ProductList:
+      type: object
+      properties:
+        productId:
+          type: string
+        productVersion:
+          type: string
+    AuthorizedProductList:
+      type: object
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AuthorizedProductItem"
+    LicensePortalDetails:
+      type: object
+      properties:
+        currentUser:
+          type: string
+        partnerName:
+          type: string
+        partnerStatus:
+          type: string
+        partnerEmail:
+          type: string
+        partnerPhoneNumber:
+          type: string
+        partnerRepresentative:
+          type: string
+        authorizedTo:
+          type: string
+        authorizedProductList:
+          $ref: "#/components/schemas/AuthorizedProductList"
+    PermissionMgtItem:
+      type: object
+      properties:
+        permissionId:
+          type: string
+        permissionName:
+          type: string
+        childNodes:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PermissionMgtItem"
+    PermissionMgtList:
+      type: object
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PermissionMgtItem"
+    PartnerMgtItem:
+      type: object
+      properties:
+        partnerId:
+          type: string
+        partnerName:
+          type: string
+    PartnerMgtList:
+      type: object
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PartnerMgtItem"
+    RoleMgtCreate:
+      type: object
+      required:
+        - roleName
+        - roleType
+        - permissionIdList
+      properties:
+        roleName:
+          type: string
+        roleDesc:
+          type: string
+        roleType:
+          type: string
+        permissionIdList:
+          type: array
+          items:
+            type: string
+    RoleMgtId:
+      type: object
+      required:
+        - roleId
+      properties:
+        roleId:
+          type: string
+    RoleMgtUpdate:
+      type: object
+      required:
+        - roleId
+        - roleName
+        - roleType
+        - permissionIdList
+      properties:
+        roleId:
+          type: string
+        roleName:
+          type: string
+        roleDesc:
+          type: string
+        roleType:
+          type: string
+        permissionIdList:
+          type: array
+          items:
+            type: string
+    RoleMgtItem:
+      type: object
+      properties:
+        roleId:
+          type: string
+        roleName:
+          type: string
+        roleDesc:
+          type: string
+        roleType:
+          type: string
+        permissionList:
+          type: array
+          items:
+            $ref: "#/components/schemas/PermissionMgtItem"
+    RoleMgtList:
+      type: object
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RoleMgtItem"
+    UserStatus:
+      type: string
+      enum:
+        - Active
+        - Inactive
+    UserMgtCreate:
+      type: object
+      required:
+        - userEmail
+        - userType
+        - companyName
+        - organizationType
+        - roleIdList
+        - isSendEmail
+      properties:
+        userEmail:
+          type: string
+        userType:
+          type: string
+        phoneNumber:
+          type: string
+        companyName:
+          type: string
+        partnerId:
+          type: string
+        organizationType:
+          type: string
+        roleIdList:
+          type: array
+          items:
+            type: string
+        isSendEmail:
+          type: string
+          default: "true"
+    UserMgtId:
+      type: object
+      required:
+        - userEmail
+      properties:
+        userEmail:
+          type: string
+    UserMgtUpdate:
+      type: object
+      required:
+        - userEmail
+        - userType
+        - userStatus
+        - companyName
+        - organizationType
+        - roleIdList
+      properties:
+        userEmail:
+          type: string
+        userType:
+          type: string
+        userStatus:
+          $ref: "#/components/schemas/UserStatus"
+        phoneNumber:
+          type: string
+        companyName:
+          type: string
+        partnerId:
+          type: string
+        organizationType:
+          type: string
+        roleIdList:
+          type: array
+          items:
+            type: string
+    UserMgtItem:
+      type: object
+      properties:
+        userEmail:
+          type: string
+        userType:
+          type: string
+        userStatus:
+          $ref: "#/components/schemas/UserStatus"
+        phoneNumber:
+          type: string
+        companyName:
+          type: string
+        partnerId:
+          type: string
+        organizationType:
+          type: string
+        roleList:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RoleMgtItem"
+    UserMgtList:
+      type: object
+      properties:
+        pageable:
+          $ref: "#/components/schemas/PageableElement"
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/UserMgtItem"
+    AuthUserEmail:
+      type: object
+      required:
+        - userEmail
+        - password
+      properties:
+        userEmail:
+          type: string
+        password:
+          type: string
+    AuthUserLogon:
+      type: object
+      required:
+        - userEmail
+        - password
+        - verificationCode
+      properties:
+        userEmail:
+          type: string
+        password:
+          type: string
+        verificationCode:
+          type: string
+    AuthUserLogonResp:
+      type: object
+      properties:
+        userEmail:
+          type: string
+        userToken:
+          type: string
+        isResetPwdRequired:
+          type: boolean
+        permissionIdList:
+          type: array
+          items:
+            type: string
+    AuthUserResetPwd:
+      type: object
+      required:
+        - userEmail
+        - password
+        - verificationCode
+      properties:
+        userEmail:
+          type: string
+        password:
+          type: string
+        verificationCode:
+          type: string
+    AuthUserResetPwdNew:
+      type: object
+      required:
+        - userEmail
+        - password
+        - randSid
+      properties:
+        userEmail:
+          type: string
+        password:
+          type: string
+        randSid:
+          type: string
+    AuthUserForgetPwd:
+      type: object
+      required:
+        - userEmail
+        - lang
+      properties:
+        userEmail:
+          type: string
+        lang:
+          type: string
+    AuthUserResetPwdByOldPwd:
+      type: object
+      required:
+        - oldPassword
+        - newPassword
+      properties:
+        oldPassword:
+          type: string
+        newPassword:
+          type: string
+    AuthUserPermissionList:
+      type: object
+      properties:
+        permissionIdList:
+          type: array
+          items:
+            type: string
+
