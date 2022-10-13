@@ -37,9 +37,7 @@ jobs:
       run: ls -a
 
     - name: Step 5 - What is the target folder
-      run: |
-      cd target
-      ls -a 
+      run: cd target && ls -a 
 
 #    - name: Step 6 - Publish to GitHub Packages Apache Maven
 #      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
